@@ -9,4 +9,4 @@ categories: javascript poker
 
 I found a project I made a few years back when I first started playing with canvas. I think its still quite a fun toy.
 
-<iframe width="100%" height="500" src="http://jsfiddle.net/haveacigaro/zj9fpgxt/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
+<iframe width="100%" height="700" src="http://jsfiddle.net/haveacigaro/zj9fpgxt/embedded/result,js,html,css" allowfullscreen="allowfullscreen" frameborder="0"></iframe>
