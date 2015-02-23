@@ -7,7 +7,7 @@ categories: phing development
 
 Deploying applications to remote servers can be problematic. Traditionally, files would be transferred via FTP to a remote host, using a tool like FileZilla.
 
-This isn’t however a complete solution. Depending on your project, once the files have been transferred to the server, other operations may need to be carried out (such as changing owners, or file permissions).
+This isn't however a complete solution. Depending on your project, once the files have been transferred to the server, other operations may need to be carried out (such as changing owners, or file permissions).
 
 Another scenario is that you are using a dependency manager such as Composer. Uploading via FTP would mean that it is necessary to either download the dependancies locally then upload them via FTP or upload the files, then SSH into the remote server and download the dependancies remotely.
 
@@ -19,11 +19,11 @@ So in this scenario several operations need to be completed before the site is l
 
 Phing [Phing Is Not GNU Make] is a tool which allows us to script the deployment process using XML.
 
-Phing comes with a host of tools to allow us to build an entire application, but for the purpose of this example, we’ll focus on deployment.
+Phing comes with a host of tools to allow us to build an entire application, but for the purpose of this example, we'll focus on deployment.
 
 #The scenario#
 
-Lets assume you have a project that you’ve currently got a Composer project on GitHub which you intend to be updated on a remote server via SSH. This project has a caching directory which needs to be cleared every time the server is updated.
+Lets assume you have a project that you've currently got a Composer project on GitHub which you intend to be updated on a remote server via SSH. This project has a caching directory which needs to be cleared every time the server is updated.
 
 So the order of operations will be something like this:
 
@@ -36,6 +36,9 @@ The Files
 
 Initially we need to create two XML files, build.xml and buildremote.xml. The job of build.xml will be to transfer buildremote.xml and to execute it once it is on the server.
 
+{% gist alanmonger/8836319 %}
+{% gist alanmonger/8836355 %}
+
 #Execution#
 
-As these two files are now configured, the user now only needs to move to execute the command ” “phing” in their terminal, phing will then take over and handle the deployment.
+As these two files are now configured, the user now only needs to move to execute the command “phing” in their terminal, phing will then take over and handle the deployment.
