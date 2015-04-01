@@ -1,5 +1,6 @@
 # Site settings
 title: Alan Monger
+logo: /assets/site/logo.svg
 email: alan@alanmonger.co.uk
 description: > # this means to ignore newlines until "baseurl:"
     A tech blog with things I find interesting
