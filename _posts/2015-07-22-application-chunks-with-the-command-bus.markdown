@@ -56,4 +56,4 @@ In this example, we've charge the customers card, and dispatched a new event. We
 
 CQRS (Command Query Responsibility Segregation) is taking this pattern one step further. For large enterprise applications this may be a desirable way to separate a monolith, and by using a command bus they can achive this.
 
-CQRS is identical to the command bus, except it replaces the service layer completely with more commands, which are either dedicated to read or write.
+CQRS is identical to the command bus, except it replaces the service layer completely with query objects, which are commands dedicated to a single query.
