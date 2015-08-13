@@ -117,10 +117,6 @@ RUN gem install mailcatcher
 RUN export DEBIAN_FRONTEND=noninteractive
 RUN curl -sS https://getcomposer.org/installer | php
 
-RUN service mysql restart
-RUN service mysql start
-RUN mailcatcher
-
 EXPOSE 22 80
 CMD ["/usr/sbin/apache2ctl -D FOREGROUND"]
 {% endhighlight %}
