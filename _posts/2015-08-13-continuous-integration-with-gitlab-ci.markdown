@@ -52,7 +52,7 @@ What we're aiming to contain within this example is:
 
 #### Server Setup
 
-Digital Ocean provide low cost servers you can configure for multiple services. For small companies, a server with a single core (meaning you can only carry out one runner at a time) should work well for most purposes. So in this instance, we're going to be setting up a $10 a month server. This is a recommended specification from Gitlab themselves, though the bare minimum is a 512mb server.
+[Digital Ocean](https://www.digitalocean.com/?refcode=72661a1914c1) provide low cost servers you can configure for multiple services. For small companies, a server with a single core (meaning you can only carry out one runner at a time) should work well for most purposes. So in this instance, we're going to be setting up a $10 a month server. This is a recommended specification from Gitlab themselves, though the bare minimum is a 512mb server.
 
 The server needs to be the x64 version, as docker isn't compatible with the 386 architecture. Here, I've chosen Ubuntu 14.04.
 
