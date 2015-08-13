@@ -4,9 +4,9 @@ email: alan@alanmonger.co.uk
 description: > # this means to ignore newlines until "baseurl:"
     A tech blog with things I find interesting
 baseurl: "" # the subpath of your site, e.g. /blog/
-url: "http://alanmonger.co.uk" # the base hostname & protocol for your site
+url: "" # the base hostname & protocol for your site
 twitter_username: haveacigaro
-github_username: alanmonger
+github_username: amonger
 
 # Build settings
 markdown: kramdown
