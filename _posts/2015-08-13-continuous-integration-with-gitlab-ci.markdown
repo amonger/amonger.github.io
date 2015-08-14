@@ -157,9 +157,9 @@ Here we've defined the image we built earlier can be used with Gitlab CI under a
 Now we've done all that admin work, we can enable the runner on the Gitlab CI website.
 
 ## Setup a .gitlab-ci.yml file
-We've finished setting up our runner, so now we can begin running tests! Our image already contains the majority of services we need, so we just need to create a file which defines how to run our tests. This file is placed in our projects repository and is commited into version control (in the root of the project).
+We've finished setting up our runner, so now we can begin running tests! Our image already contains the majority of services we need, so we just need to create a file which defines how to run our tests. This file is placed in our projects repository and is committed into version control (in the root of the project).
 
-##### .gitlab-ci.yml
+#### .gitlab-ci.yml
 {% highlight toml %}
 image: php56
 
@@ -177,6 +177,8 @@ job1:
 
 ## Finishing Up
 As we've already configured the service to run with our runner, so the next time you commit to the project, the projects tasks will be run and you will be able to view the status of each build on the GitLab CI website.
+
+![gitlab ci]({{ site.url }}/assets/gitlabci/success.png)
 
 Merge requests will now also have the additional merge status field which will tell you whether you should merge your branch into master.
 
