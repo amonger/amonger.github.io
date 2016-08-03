@@ -4,55 +4,77 @@ title:  "Continuous Integration With Gitlab CI"
 date:   2015-08-13 22:05:11
 categories: PHP Continuous integration gitlab CI docker
 ---
-![gitlab ci]({{ site.url }}/assets/gitlabci/gitlabci.png)
+<img src="/assets/gitlabci/gitlabci.png" alt="gitlab ci">
 
-## Existing Solutions
+<h2>Existing Solutions</h2>
+<p>
 There are some fantastic tools available for continuous integration, particuarly for open source projects. Jenkins is probably the most popular; written in java its compatible with most operating systems and works with many languages. It also has multiple plugins so you're able to configure the system to suit you.
-
+</p>
+<p>
 Jenkins is however quite an old project. By default each project has operate within the state of the server, which might not accurately represent the server your application is going to end up being deployed on.
-
+</p>
+<p>
 Travis CI is a fantastic example of the next version of continuous integration tools. As each project is run in an individual virtual machine, you're able to define what version of the language you're running, the queue software and database to accurately mimic your server.
-
+</p>
+<p>
 This is fantastic to run your unit, functional and integration tests, and is completely free for open source projects. By integrating this software with the git software you're using, you can ensure that a branch you've created is working correctly before merging into master.
-
+</p>
+<p>
 Unfortunately Travis CI is quite an expensive solution if you have small projects you want to keep private, or you have a large number of projects which each have few commits.
+</p>
 
-### Enter Gitlab CI... and Docker
+<h3>Enter Gitlab CI... and Docker</h3>
+<p>
 Gitlab CI is a fantastic piece of software, which leverages docker images, to give you complete control over your environment. This means you can choose the type of server, software and memory you need to allocate to a project.
-
+</p>
+<p>
 As runners are attached to Gitlab CI, you can increase the number of runners on each project, and scale them as a project grows.
+</p>
 
-## Setting up
+<h2>Setting up</h2>
+<p>
 For this example, we're going to configure Gitlab CI with Gitlab Enterprise.
+</p>
 
-### Gitlab Enterprise
+<h3>Gitlab Enterprise</h3>
+<p>
 Gitlab enterprise is available as a free service with unlimited private repositories. This is a great solution for agencies who need to manage multiple projects across several developers.
-
+</p>
+<p>
 It can also be self hosted, so if security is a concern, that is always an option.
+</p>
 
-* Sign up for an account over at [Gitlab.com](http://www.gitlab.com).
-* Create a repository and push some stuff onto it.
+<ul>
+    <li>Sign up for an account over at <a href="http://www.gitlab.com" target="_blank">Gitlab</a></li>
+    <li>Create a repository and push some stuff onto it</li>
+</ul>
 
-#### Gitlab CI
-As you now already are registered with a gitlab account, you can access Gitlab CI by accessing [ci.gitlab.com](http://ci.gitlab.com).
-
+<h4>Gitlab CI</h4>
+<p>
+As you now already are registered with a gitlab account, you can access Gitlab CI by accessing <a href="http://ci.gitlab.com" target="_blank">ci.gitlab.com</a>.
+</p>
+<p>
 Add your newly created project to the tool by clicking "Add project to CI".
-
+</p>
+<p>
 Click on runners in the left navigation menu, where you can copy your registration token (you'll need this in the next step).
+</p>
 
-
-### Create a Runner
+<h3>Create a Runner</h3>
+<p>
 Gitlab CI needs a runner from you to be able to carry out some operation. Gitlab (the company) provides a service written in go which uses Docker to "contain" that image.
 What we're aiming to contain within this example is:
+</p>
+<ul>
+    <li>An Apache server</li>
+    <li>PHP 5.6</li>
+    <li>MySQL</li>
+    <li>MailCatcher</li>
+</ul>
 
-* An Apache server
-* PHP 5.6
-* MySQL
-* MailCatcher
+<h4>Server Setup</h4>
 
-#### Server Setup
-
-[Digital Ocean](https://www.digitalocean.com/?refcode=72661a1914c1) provide low cost servers you can configure for multiple services. For small companies, a server with a single core (meaning you can only carry out one runner at a time) should work well for most purposes. So in this instance, we're going to be setting up a $10 a month server. This is a recommended specification from Gitlab themselves, though the bare minimum is a 512mb server.
+<a href="https://www.digitalocean.com/?refcode=72661a1914c1" target="_blank" onclick="ga('send', 'event', 'referal', 'click', 'Digital Ocean', '25');">Digital Ocean</a> provide low cost servers you can configure for multiple services. For small companies, a server with a single core (meaning you can only carry out one runner at a time) should work well for most purposes. So in this instance, we're going to be setting up a $10 a month server. This is a recommended specification from Gitlab themselves, though the bare minimum is a 512mb server.
 
 The server needs to be the x64 version, as docker isn't compatible with the 386 architecture. Here, I've chosen Ubuntu 14.04.
 
