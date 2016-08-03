@@ -75,16 +75,20 @@ What we're aiming to contain within this example is:
 <h4>Server Setup</h4>
 
 <a href="https://www.digitalocean.com/?refcode=72661a1914c1" target="_blank" onclick="ga('send', 'event', 'referal', 'click', 'Digital Ocean', '25');">Digital Ocean</a> provide low cost servers you can configure for multiple services. For small companies, a server with a single core (meaning you can only carry out one runner at a time) should work well for most purposes. So in this instance, we're going to be setting up a $10 a month server. This is a recommended specification from Gitlab themselves, though the bare minimum is a 512mb server.
+<p>
+
 
 The server needs to be the x64 version, as docker isn't compatible with the 386 architecture. Here, I've chosen Ubuntu 14.04.
-
+</p><p>
 You can add your public key here or if you prefer, create without and you'll be emailed your password.
-
+</p><p>
 After you press create droplet, it'll take about 30 seconds to setup your VPS (Virtual Private Server).
+</p>
 
-#### Runner Setup
+<h4>Runner Setup</h4>
+<p>
 SSH into your new server. Update aptitude and install the runner by executing:
-
+</p>
 {% highlight bash %}
 apt-get update \
 curl -sSL https://get.docker.com/ | sh \
@@ -92,13 +96,18 @@ curl -L https://packages.gitlab.com/install/repositories/runner/gitlab-ci-multi-
 apt-get install gitlab-ci-multi-runner -y
 {% endhighlight %}
 
+<p>
 Now you'll need to register the runner you configured earlier.
 Run:
+</p>
 
 {% highlight bash %}
 gitlab-ci-multi-runner register
 {% endhighlight %}
+
+<p>
 Register the runner:
+</p>
 
 {% highlight bash %}
 Please enter the gitlab-ci coordinator URL (e.g. http://gitlab-ci.org:3000/ )
@@ -113,17 +122,20 @@ docker
 Please enter the Docker image (eg. ruby:2.1):
 ubuntu
 {% endhighlight %}
-
+<p>
 Apply the key you took from the GitLab CI website from the previous step.
+</p>
 
-#### Runner Image
+<h4>Runner Image</h4>
+<p>
 Now we've setup the runner, we can work on the image. As previously stated, the image is a docker container which we're going to configure to lose its state after the build has completed.
-
+</p><p>
 As we've already installed docker in the last step, we can work on our docker file. This is a file which defines which packages we want to install for our container.
-
+</p><p>
 As we're mainly concerned about running tests then losing state, we're going to configure docker to install all these dependancies within a single configuration file. However if you begin to look further into using docker you'd likely separate these out.
+</p>
 
-#### Dockerfile
+<h4>Dockerfile</h4>
 
 {% highlight bash %}
 FROM ubuntu
@@ -142,23 +154,28 @@ RUN curl -sS https://getcomposer.org/installer | php
 EXPOSE 22 80
 CMD ["/usr/sbin/apache2ctl -D FOREGROUND"]
 {% endhighlight %}
+<p>
 Here we're installing apache, mysql, ruby, and mailcatcher. These tools are adequate for our needs, but we can update this whenever we need to. Save this as "Dockerfile".
+</p>
 
-#### Build
-
+<h4>Build</h4>
+<p>
 Now we need to build the file. You can do this by changing to the directory containing the Dockerfile and running:
-
+</p>
 {% highlight bash %}
 docker build -t "php56" .
 {% endhighlight %}
-
+</p><p>
 The "php56" is the name of the image you're creating. This can be whatever you want. You can create multiple builds with several docker files if you have different environments you'd like to test.
+</p>
 
+<h4>Final configuration</h4>
 
-#### Final configuration
+<p>
 Finally we need to tell the CI tool what images it's allowed to run. Although Docker Inc. have updated docker to prevent container breakout, we don't really want to allow any images to run on the server. By default this is disabled, and the image provided will be the image defined when defining the runner.
+</p>
 
-####/etc/gitlab-runner/config.toml
+<h4>/etc/gitlab-runner/config.toml</h4>
 
 {% highlight toml %}
 [[runners]]
@@ -172,16 +189,21 @@ Finally we need to tell the CI tool what images it's allowed to run. Although Do
     image = "ubuntu"
     allowed_images = ["php56"]
 {% endhighlight %}
-
+<p>
 Here we've defined the image we built earlier can be used with Gitlab CI under allowed_images. This can be replaced with a "*" if you'd prefer to run any image.
+</p>
 
-## Enable The Runner
+<h2>Enable The Runner</h2>
+<p>
 Now we've done all that admin work, we can enable the runner on the Gitlab CI website.
+</p>
 
-## Setup a .gitlab-ci.yml file
+<h2>Setup a .gitlab-ci.yml file</h2>
+<p>
 We've finished setting up our runner, so now we can begin running tests! Our image already contains the majority of services we need, so we just need to create a file which defines how to run our tests. This file is placed in our projects repository and is committed into version control (in the root of the project).
+</p>
 
-#### .gitlab-ci.yml
+<h3>.gitlab-ci.yml</h3>
 {% highlight toml %}
 image: php56
 
@@ -197,13 +219,15 @@ job1:
         - vendor/bin/phpunit tests
 {% endhighlight %}
 
-## Finishing Up
+<h2>Finishing Up</h2>
+<p>
 As we've already configured the service to run with our runner, so the next time you commit to the project, the projects tasks will be run and you will be able to view the status of each build on the GitLab CI website.
-
-![gitlab ci]({{ site.url }}/assets/gitlabci/success.png)
-
+</p>
+<img src="/assets/gitlabci/success.png" />
+<p>
 Merge requests will now also have the additional merge status field which will tell you whether you should merge your branch into master.
-
+</p><p>
 Build badges are also generated, which are a nice extra to quickly view the status of a project.
-
+</p><p>
 As you can see, the Gitlab CI tool is very powerful, as you could define multiple environments, with different versions of software which could run on the same server, and are quickly provisioned thanks to the Docker container.
+</p>
