@@ -1,5 +1,6 @@
 @charset "utf-8";
 
+// @import "bootstrap";
 
 
 // Our variables
@@ -24,6 +25,11 @@ $content-width:    800px;
 $on-palm:          600px;
 $on-laptop:        800px;
 
+.related{
+  border: .1em solid $grey-color-light;
+  padding: 3em;
+  margin-top: 3em;
+}
 
 
 // Using media queries with like this:
