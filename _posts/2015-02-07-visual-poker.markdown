@@ -5,7 +5,7 @@ date:   2015-02-07 01:31:15
 categories: javascript poker
 ---
 
-#An Old Project#
+## An Old Project
 
 I found a project I made a few years back when I first started playing with canvas. I think its still quite a fun toy.
 

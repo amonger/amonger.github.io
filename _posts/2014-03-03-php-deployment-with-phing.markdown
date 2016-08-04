@@ -15,13 +15,13 @@ You may then need to clear your cache.
 
 So in this scenario several operations need to be completed before the site is live, and these tasks need to be repeated every time a modification has been made to the local copy. So it makes sense to automate these tasks.
 
-##Phing##
+## Phing
 
 Phing [Phing Is Not GNU Make] is a tool which allows us to script the deployment process using XML.
 
 Phing comes with a host of tools to allow us to build an entire application, but for the purpose of this example, we'll focus on deployment.
 
-##The scenario##
+## The scenario
 
 Lets assume you have a project that you've currently got a Composer project on GitHub which you intend to be updated on a remote server via SSH. This project has a caching directory which needs to be cleared every time the server is updated.
 
@@ -33,13 +33,13 @@ So the order of operations will be something like this:
 4. Composer will be instructed to update and dump the autoloaded files
 5. The cache will be cleared
 
-##The Files##
+## The Files
 
 Initially we need to create two XML files, build.xml and buildremote.xml. The job of build.xml will be to transfer buildremote.xml and to execute it once it is on the server.
 
 {% gist alanmonger/8836319 %}
 {% gist alanmonger/8836355 %}
 
-##Execution##
+## Execution
 
 As these two files are now configured, the user now only needs to move to execute the command “phing” in their terminal, phing will then take over and handle the deployment.
