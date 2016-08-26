@@ -37,8 +37,42 @@ So the order of operations will be something like this:
 
 Initially we need to create two XML files, build.xml and buildremote.xml. The job of build.xml will be to transfer buildremote.xml and to execute it once it is on the server.
 
-{% gist alanmonger/8836319 %}
-{% gist alanmonger/8836355 %}
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Deploy" default="production" basedir="." description="A deployment Script">
+    <property name="remote_host" value="host.com"/>
+    <property name="remote_user" value="username"/>
+    <property name="remote_pass" value="password"/>
+    <target name="production">
+
+        <echo msg="Uploading remote phing script"/>
+        <scp host="${remote_host}" username="${remote_user}" password="${remote_pass}"
+             todir="/home/learnmango/phing-example"
+             file="remotebuild.xml" />
+        <ssh host="${remote_host}" username="${remote_user}" password="${remote_pass}"
+             command="cd phing-example; phing remotebuild.xml; mv remotebuild.xml build.xml" />
+    </target>
+</project>
+{% endhighlight %}
+{% highlight xml %}
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Deploy" default="production" basedir="." description="A deployment Script">
+    <property name="remote_host" value="host.com"/>
+    <property name="remote_user" value="user"/>
+    <property name="remote_pass" value="pass"/>
+    <target name="production">
+        <exec command="cd site" />
+        <echo msg="Pulling down latest git version"/>
+        <exec command="git pull" />
+        <echo msg="Updating dependancies"/>
+        <exec command="composer.phar update" />
+        <echo msg="Dumping autoload"/>
+        <exec command="composer.phar dump-autoload -o" />
+        <echo msg="Clearing the cache"/>
+        <exec command="rm -rf ./cache/*" />
+    </target>
+</project>
+{% endhighlight%}
 
 ## Execution
 
