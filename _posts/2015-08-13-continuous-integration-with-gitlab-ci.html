@@ -138,7 +138,7 @@ As we're mainly concerned about running tests then losing state, we're going to 
 <h4>Dockerfile</h4>
 
 {% highlight bash %}
-FROM ubuntu
+FROM ubuntu:14.04
 
 RUN apt-get update -y
 RUN apt-get install apache2 make build-essential -y
