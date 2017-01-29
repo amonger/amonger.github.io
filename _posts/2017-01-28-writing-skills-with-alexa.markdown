@@ -5,8 +5,6 @@ date:   2017-01-28 11:44:15
 categories: alexa javascript lambda dot echo amazon home automation
 ---
 
-# Writing Skills with Alexa
-
 ## A bit of background
 
 I've always loved the idea of home automation, and with the release of voice controlled devices, such as Alexa, Siri, and Google Home, we can now control devices, or query information on the internet.
