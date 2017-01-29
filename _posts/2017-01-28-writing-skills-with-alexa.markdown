@@ -27,7 +27,7 @@ The first thing we need to figure out what tasks we want to execute. We might wa
 
 We define this in JSON, where we define our _Intents_, which are keywords which we bind our _Utterances_ and code to. We also have _Slots_ which are variables that have a defined type.
 
-```json
+{% highlight json %}
 {
   "intents": [
     {
@@ -50,7 +50,7 @@ We define this in JSON, where we define our _Intents_, which are keywords which 
     }
   ]
 }
-```
+{% endhighlight %}
 
 ### Slots
 Slots are variables which have an associated type. The type generally has predefined variables(see [Slot Type reference](https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)), however if we're using a custom slot type (like we're using above), we can have undefined variables which get passed through to our code.
@@ -95,7 +95,7 @@ Amazon have made an SDK which provides a class which generates responses. You ca
 Make a Alexa skill directory which is going to hold your index.js file, and any node modules, or your AlexaSkill js module. The downside of using npm is you won't be able to live update your code on Lambda, though you will be able to utilise npm libraries in your project.
 
 
-```
+{% highlight javascript %}
 var AlexaSkill = require('./AlexaSkill');
 var http = require('http');
 
@@ -176,7 +176,7 @@ exports.handler = function (event, context) {
     kodi.execute(event, context);
 };
 
-```
+{% endhighlight %}
 
 You can see above that the intentHandlers define an object literal of the intents we defined in our Interaction Model. This is what is executed when our utterance has been detected. The slot data is passed across in the `intent.slots` array, which we can then pass across to some other method. In this example, we're passing it across to different methods to get resolved, and returning a promise, so we only send a response once we've recieved the data we're expecting. Depending on how fast the external sources you're looking at, you might need to bump up the execution time on your Lambda function.
 
