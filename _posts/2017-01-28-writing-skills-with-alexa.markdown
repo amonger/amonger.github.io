@@ -107,7 +107,6 @@ Kodi.prototype = Object.create(AlexaSkill.prototype);
 Kodi.prototype.constructor = Kodi;
 
 Kodi.prototype.intentHandlers = {
-    // register custom intent handlers
     "TVShowSearchIntent": function (intent, session, response) {
         TvShowSearchIntent(intent.slots.TVShowName.value).then(data => {
             response.tellWithCard(
@@ -133,7 +132,6 @@ Kodi.prototype.intentHandlers = {
 };
 
 function TvShowSearchIntent (tvShowTitle) {
-    // var movieTitle = event.request.intent.slots.MovieTitle.value;
     var endpoint = 'http://mykodiapp.net:3000/show/' + tvShowTitle;
 
     return new Promise((resolve, reject) => {
