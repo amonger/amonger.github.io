@@ -180,7 +180,7 @@ exports.handler = function (event, context) {
 
 You can see above that the intentHandlers define an object literal of the intents we defined in our Interaction Model. This is what is executed when our utterance has been detected. The slot data is passed across in the `intent.slots` array, which we can then pass across to some other method. In this example, we're passing it across to different methods to get resolved, and returning a promise, so we only send a response once we've recieved the data we're expecting. Depending on how fast the external sources you're looking at, you might need to bump up the execution time on your Lambda function.
 
-##Finishing up
+## Finishing up
 You now need to link your Lambda function to your Alexa Skill. You should notice in the top right corner of the lambda skill will have an **ARN** (Amazon Resource Number). You need to paste this reference into the configuration section in the Config Section of your Alexa Skill.
 
 If you're using the same account Alexa is already linked to, you'll now be able to issue commands.
